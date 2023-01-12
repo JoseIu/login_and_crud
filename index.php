@@ -1,10 +1,4 @@
-<?php
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-$auth = $_SESSION['login'];
-require 'includes/header.php'; ?>
+<?php require 'includes/header.php'; ?>
 
 <main>
     <section class="section wrapper">

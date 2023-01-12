@@ -1,3 +1,12 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+$auth = $_SESSION['login'] ?? false;
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -21,6 +30,9 @@
                         <a class="nav__link" href="/login/includes/templades/profile.php">Perfil</a>
                         <a class="nav__link" href="/login/includes/templades/register.php">Registrarse</a>
                         <a class="nav__link" href="/login/includes/templades/login.php">Iniciar Sesión</a>
+                        <?php if ($auth) : ?>
+                            <a class="nav__link" href="/login/includes/templades/cerrar-sesion.php">Cerrar Sesión</a>
+                        <?php endif ?>
                     </li>
                 </ul>
             </nav>
