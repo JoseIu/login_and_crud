@@ -8,3 +8,11 @@ function autenticado(): bool {
 
     return false;
 }
+
+function getUsderID(): string {
+    session_start();
+    $id = $_SESSION['usuarioID'];
+    if ($id) {
+        return $id;
+    }
+}

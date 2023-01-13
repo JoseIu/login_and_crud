@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($resultado->num_rows) {
             //revisar si el password es correcto
             $usuario = mysqli_fetch_assoc($resultado);
+            // var_dump($usuario);
 
             $auth = password_verify($password, $usuario['password']);
 
@@ -32,8 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 //llenamos el array de la sesión
                 $_SESSION['usuario'] = $usuario['correo'];
                 $_SESSION['login']   = true;
+                $_SESSION['usuarioID'] = $usuario['id'];
 
-                header('Location:/login/index.php');
+                // header('Location:/login/index.php');
             } else {
                 $errores[] = 'El password es incorrecto';
             }

@@ -4,6 +4,11 @@ $auth = autenticado();
 if (!$auth) {
     header('Location:/login/index.php');
 }
+
+// $userID = $_SESSION['usuarioID'];
+$userID = getUsderID();
+
+echo $userID;
 ?>
 
 <?php require '../header.php'; ?>

@@ -1,6 +1,8 @@
-<?php require '../db/database.php';
-
+<?php
+require '../db/database.php';
+include '../header.php';
 $db = conectarDB();
+
 $errores = [];
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -8,6 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $correo       = mysqli_real_escape_string($db, filter_var($_POST['correo'], FILTER_VALIDATE_EMAIL));
     $password     = mysqli_real_escape_string($db, $_POST['password']);
     $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+
+    // echo $correo;
+    // echo $password;
 
     //Comprovamos si hay errores
     if (!$correo) {
@@ -28,15 +33,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //si no hay errores registramos al usuario
     if (empty($errores)) {
         $query = "INSERT INTO usuarios (correo, password) VALUES ('$correo','$passwordHash')";
-
+        echo $query;
         mysqli_query($db, $query);
+
         header('Location:/login/index.php');
     }
 }
 
 ?>
 
-<?php include '../header.php'; ?>
+
 <main>
     <section class="login wrapper">
         <div class="login__alerts">
@@ -44,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p class="login__error"> <?php echo $error ?></p>
             <?php endforeach ?>
         </div>
-        <form class="login__form" action="login.php" method="POST">
+        <form class="login__form" action="register.php" method="POST">
             <label class="login__label" for="correo">Correo</label>
             <input class="login__input" type="email" name="correo">
 
